@@ -2,7 +2,7 @@
     <div class="container mx-auto py-8">
         <div class="flex items-center gap-3 mb-5">
              <h1 class="text-2xl font-bold ">Liste des Utilisateurs</h1>
-           <a class="text-white" :href="route('users.create')" :active="request()->routeIs('dashboard')">
+           <a class="text-white" href="{{route('users.create')}}" :active="request()->routeIs('dashboard')">
             <button class="bg-blue-500 rounded-sm px-2 transition hover:bg-blue-600">       Créer</button>
             </a>
         </div>
