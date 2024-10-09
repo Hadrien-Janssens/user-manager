@@ -71,8 +71,25 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'nullable|string|min:8',
+            'role' => 'required|in:user,admin',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->role = $validatedData['role'];
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Utilisateur modifié avec succès.');
     }
+    // if ($request->filled('password')) {
+    //     $user->password = bcrypt($validatedData['password']);
+    // }
 
     /**
      * Remove the specified resource from storage.
