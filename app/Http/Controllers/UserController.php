@@ -6,14 +6,24 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        if ($request->input('search') === null) {
+            $users = User::paginate(10);
+
+            return view('users.index', ['users' => $users]);
+        }
+
+        $req =  $request->input('search');
+        $users = User::where('name', 'like', "%$req%")->orWhere('email', 'like', "%$req%")->paginate(10);
+
         return view('users.index', ['users' => $users]);
     }
 

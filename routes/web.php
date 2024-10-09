@@ -20,4 +20,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('users', UserController::class)->middleware('auth');
 
+// Route::get('/search', [UserController::class, 'search'])->middleware('auth')->name('users.search');
+
 require __DIR__ . '/auth.php';
