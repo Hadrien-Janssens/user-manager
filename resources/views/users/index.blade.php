@@ -22,10 +22,19 @@
                     <td class="py-2 px-4 border-b">{{ $user->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->role }}</td>
-                    <td class="py-2 px-4 border-b">
-                        <button class="px-2 p-0.5"><a href="{{ route('users.show', $user->id) }}" class="text-blue-500">Voir</a></button>
+                    <td class="py-2 px-4 border-b flex flex-col gap-1  ">
+                       <a href="{{ route('users.show', $user->id) }}" class="text-blue-500 border border-blue-500 rounded px-1 ml-2 text-center">Voir</a>
                         
-                        <a href="{{ route('users.edit', $user->id) }}" class="text-yellow-500 ml-2">Modifier</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="text-yellow-500 ml-2 border border-yellow-500 rounded px-1 text-center">Modifier</a>
+
+
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" >
+                            @method('DELETE')
+                            @csrf
+                            <button class="text-red-500 ml-2 border border-red-500 rounded px-1 text-center">
+                            Supprimer
+                        </button></form>
+                      
                     </td>
                 </tr>
                 @endforeach
